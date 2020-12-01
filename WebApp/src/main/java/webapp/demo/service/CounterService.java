@@ -3,11 +3,12 @@ package webapp.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webapp.demo.model.Counter;
-import webapp.demo.repository.CounterRepository;
+//import webapp.demo.repository.CounterRepository;
 
 @Service
 public class CounterService {
 
+    /*
     @Autowired
     CounterRepository counterRepository;
 
@@ -26,5 +27,5 @@ public class CounterService {
         counterRepository.save(counter);
         return counter.getCountNumber();
 
-    }
+    } */
 }
