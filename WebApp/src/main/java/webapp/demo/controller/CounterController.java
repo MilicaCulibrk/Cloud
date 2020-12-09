@@ -22,9 +22,9 @@ public class CounterController {
     @GetMapping(path = "/counter", produces = "application/json")
     public ResponseEntity getCounter() {
 
-        //int counter = counterService.getCounter();
+        int counter = counterService.getCounter();
 
-        return new ResponseEntity<>("milica", HttpStatus.OK) ;
+        return new ResponseEntity<>(counter, HttpStatus.OK) ;
 
     }
 

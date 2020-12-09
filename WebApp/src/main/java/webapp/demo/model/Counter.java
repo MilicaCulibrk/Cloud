@@ -1,16 +1,16 @@
 package webapp.demo.model;
 
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-//@Entity(name ="counter")
+@Entity(name ="counter")
 public class Counter {
 
-    //@Id
+    @Id
     private Long id;
 
-    //@Column(name = "countNumber", nullable = false)
+    @Column(name = "countNumber", nullable = false)
     private int countNumber;
 
     public Counter(){}
