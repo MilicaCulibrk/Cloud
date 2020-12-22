@@ -17,7 +17,7 @@ services:
       - application-network
 
   webapp:
-    build: .
+    build: ./WebApp
     container_name: webapp
     ports:
         - "8081:8081"
