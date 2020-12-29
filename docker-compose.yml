@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  
+  postgres:
+    image: 'postgres'
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=Cloud
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  webapp1:
+    build: ./WebApp
+    container_name: webapp1
+    ports:
+        - "8081:8080"
+    environment:
+      DATABASE_DOMAIN : postgres
+      DATABASE_PORT : 5432
+      POSTGRES_PASSWORD : root
+      POSTGRES_USER : postgres
+      POSTGRES_DB : Cloud
+    depends_on:
+      - postgres
+
+  webapp2:
+    build: ./WebApp
+    container_name: webapp2
+    ports:
+        - "8082:8080"
+    environment:
+      DATABASE_DOMAIN : postgres
+      DATABASE_PORT : 5432
+      POSTGRES_PASSWORD : root
+      POSTGRES_USER : postgres
+      POSTGRES_DB : Cloud
+    depends_on:
+      - postgres
+
+  nginx1:
+    build: ./NGINX/App
+    container_name: nginx1
+    ports:
+      - "81:80"
+    depends_on:
+      - webapp1
+
+  nginx2:
+    build: ./NGINX/LoadBalancer
+    container_name: nginx2
+    ports:
+      - "82:80"
+    depends_on:
+      - webapp1
+      - webapp2
+    
+volumes:
+  pgdata:
+
