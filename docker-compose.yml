@@ -15,7 +15,6 @@ services:
     ports:
       - 5432:5432
 
-
   webapp1:
     build: ./WebApp
     container_name: webapp1
@@ -65,5 +64,4 @@ services:
     
 volumes:
   pgdata:
-
 
