@@ -13,12 +13,10 @@ public class Counter {
     @Column(name = "countNumber", nullable = false)
     private int countNumber;
 
-    public Counter(){}
+    @Column(name = "countNumber2", nullable = false)
+    private int countNumber2;
 
-    public Counter(Long id, int countNumber) {
-        this.id = id;
-        this.countNumber = countNumber;
-    }
+    public Counter(){}
 
     public Long getId() {
         return id;
@@ -34,5 +32,13 @@ public class Counter {
 
     public void setCountNumber(int countNumber) {
         this.countNumber = countNumber;
+    }
+
+    public int getCountNumber2() {
+        return countNumber2;
+    }
+
+    public void setCountNumber2(int countNumber2) {
+        this.countNumber2 = countNumber2;
     }
 }

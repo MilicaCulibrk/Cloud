@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import webapp.demo.model.Counter;
 import webapp.demo.service.CounterService;
 
 import java.util.ArrayList;
@@ -22,9 +23,15 @@ public class CounterController {
     @GetMapping(path = "/counter", produces = "application/json")
     public ResponseEntity getCounter() {
 
-        int counter = counterService.getCounter();
+        Counter counter = null;
 
-        return new ResponseEntity<>(counter, HttpStatus.OK) ;
+        if(System.getenv("HOST").equals("host1")){
+            counter = counterService.getCounter();
+        }else{
+            counter = counterService.getCounter2();
+        }
+
+        return new ResponseEntity<>("Current host: " + System.getenv("HOST") + "\n Host 1: " + counter.getCountNumber() + "\n Host 2: " + counter.getCountNumber2(), HttpStatus.OK) ;
 
     }
 
@@ -32,9 +39,12 @@ public class CounterController {
     public ResponseEntity getEnvironmentVariables() {
 
         List<Object> environmentVariables = new ArrayList<>();
-        environmentVariables.add(System.getenv("DB_URL"));
-        environmentVariables.add(System.getenv("DB_USERNAME"));
-        environmentVariables.add(System.getenv("DB_PASSWORD"));
+        environmentVariables.add(System.getenv("DATABASE_DOMAIN"));
+        environmentVariables.add(System.getenv("DATABASE_PORT"));
+        environmentVariables.add(System.getenv("POSTGRES_DB"));
+        environmentVariables.add(System.getenv("POSTGRES_USER"));
+        environmentVariables.add(System.getenv("POSTGRES_PASSWORD"));
+        environmentVariables.add(System.getenv("HOST"));
 
         return new ResponseEntity<>(environmentVariables, HttpStatus.OK) ;
     }
