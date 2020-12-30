@@ -12,7 +12,7 @@ public class CounterService {
     @Autowired
     CounterRepository counterRepository;
 
-    public int getCounter() {
+    public Counter getCounter() {
 
         Counter counter = counterRepository.findById(new Long(1)).orElse(null);
 
@@ -25,7 +25,24 @@ public class CounterService {
         }
 
         counterRepository.save(counter);
-        return counter.getCountNumber();
+        return counter;
+
+    }
+
+    public Counter getCounter2() {
+
+        Counter counter = counterRepository.findById(new Long(1)).orElse(null);
+
+        if (counter == null){
+            counter = new Counter();
+            counter.setId(new Long(1));
+            counter.setCountNumber2(1);
+        }else{
+            counter.setCountNumber2(counter.getCountNumber()+1);
+        }
+
+        counterRepository.save(counter);
+        return counter;
 
     }
 }
